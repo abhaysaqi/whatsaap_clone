@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -64,5 +61,15 @@ class DefaultFirebaseOptions {
     projectId: 'whatsapp-clone-112e0',
     storageBucket: 'whatsapp-clone-112e0.firebasestorage.app',
     iosBundleId: 'com.example.whatsappClone',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBGmIRLix6abKE777-dBAE3alnGAOnvlRQ',
+    appId: '1:999000695888:web:f8057a6991247508879d55',
+    messagingSenderId: '999000695888',
+    projectId: 'whatsapp-clone-112e0',
+    authDomain: 'whatsapp-clone-112e0.firebaseapp.com',
+    storageBucket: 'whatsapp-clone-112e0.firebasestorage.app',
+    measurementId: 'G-L0RT93YTWR',
   );
 }

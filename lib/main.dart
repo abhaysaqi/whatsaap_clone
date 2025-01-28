@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp_clone/common/utils/colors.dart';
-import 'package:whatsapp_clone/features/landing/screens/landing_screen.dart';
+import 'package:whatsapp_clone/features/auth/screens/login_screen.dart';
 import 'package:whatsapp_clone/firebase_options.dart';
 import 'package:whatsapp_clone/router.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
               appBarTheme: AppBarTheme(color: appBarColor),
             ),
             onGenerateRoute: (settings) => generateRoute(settings),
-            home: LandingScreen(),
+            home: LoginScreen()
           );
         });
   }
