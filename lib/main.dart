@@ -26,15 +26,16 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (_, child) {
           return MaterialApp(
-            title: 'Flutter Demo',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData.dark().copyWith(
-              scaffoldBackgroundColor: backgroundColor,
-              appBarTheme: AppBarTheme(color: appBarColor),
-            ),
-            onGenerateRoute: (settings) => generateRoute(settings),
-            home: LoginScreen()
-          );
+              title: 'Flutter Demo',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData.dark().copyWith(
+                scaffoldBackgroundColor: backgroundColor,
+                appBarTheme: AppBarTheme(color: appBarColor),
+              ),
+              onGenerateRoute: (settings) => generateRoute(settings),
+              home: LoginScreen());
         });
   }
 }
+
+///

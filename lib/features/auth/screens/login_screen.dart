@@ -21,23 +21,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void pickCountry() {
     showCountryPicker(
+      favorite: ["IN"],
       context: context,
       showPhoneCode: true,
-      onSelect: (Country country) {
+      onSelect: (Country contry) {
         setState(() {
-          country = country;
+          country = contry;
         });
-        print('Select country: ${country.displayName}');
+        print('Select country: ${country!.displayName}');
       },
     );
   }
 
   void sendPhoneNumber() {
-    String phoneNumber = phoneController.text.trim();
-    if (country != null && phoneNumber.isNotEmpty) {
-      ref
-          .read(authControllerProvider)
-          .signWithPhone(context, '+${country!.phoneCode}$phoneNumber');
+    String phone = phoneController.text.trim();
+    if (country != null && phone.isNotEmpty) {
+      final phoneNumber =
+          '+${country!.phoneCode} ${phone.substring(0, 4)} ${phone.substring(4, 7)} ${phone.substring(7)}'; //
+
+      ref.read(authControllerProvider).signWithPhone(context, phoneNumber);
     } else {
       showSnackBar(context: context, content: "Fill out all the fields");
     }
@@ -45,15 +47,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Enter your phone number"),
-        elevation: 0,
-      ),
-      extendBodyBehindAppBar: true,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Icon(Icons.arrow_back_ios_new_rounded),
+          leadingWidth: 30.w,
+          title: Text(
+            "Enter your phone number",
+            style: TextStyle(fontSize: 24.sp),
+          ),
+          elevation: 0,
+        ),
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
@@ -61,52 +66,52 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               children: [
                 Text(
                   'Whatsapp will need to verify your phone number.',
-                  style: TextStyle(color: textColor, fontSize: 14.sp),
+                  style: TextStyle(color: textColor, fontSize: 24.sp),
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
+                SizedBox(height: 20.h),
                 TextButton(
-                    onPressed: () {
-                      pickCountry();
-                    },
-                    child: Text(
-                      "Pick Country",
-                      style: TextStyle(color: Colors.blue),
-                    )),
-                SizedBox(
-                  height: 20.h,
+                  onPressed: pickCountry,
+                  child: Text(
+                    "Pick Country",
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 ),
+                SizedBox(height: 20.h),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     if (country != null)
                       Text(
                         '+${country!.phoneCode}',
-                        style: TextStyle(color: textColor),
+                        style: TextStyle(color: textColor, fontSize: 18.sp),
                       ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    TextField(
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      // Ensure TextField does not overflow
+                      child: TextFormField(
                         maxLength: 10,
                         controller: phoneController,
-                        decoration: InputDecoration(hintText: "phone number"))
+                        decoration: InputDecoration(
+                            hintText: "Phone number", counterText: ""),
+                      ),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
-            Column(
-              children: [
-                SizedBox(
-                  width: 90.w,
-                  child: CustomButton(
-                      text: "NEXT",
-                      onpressed: () {
-                        sendPhoneNumber();
-                      }),
-                )
-              ],
-            )
+            Spacer(),
+            Container(
+              width: 120.w,
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: CustomButton(
+                text: "NEXT",
+                color: tabColor,
+                onpressed: sendPhoneNumber,
+              ),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
           ],
         ),
       ),

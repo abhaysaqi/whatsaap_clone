@@ -22,20 +22,23 @@ class LandingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 50.h,
+              height: 40.h,
             ),
             Text(
               "Welcome to WhatsApp",
               style: TextStyle(
                   color: textColor,
-                  fontSize: 33.sp,
+                  fontSize: 30.sp,
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
               height: (size.height / 9).h,
             ),
-            Image.asset(
-              "assets/images/bg.png",
+            Expanded(
+              child: Image.asset(
+                "assets/img/bg.png",
+                color: tabColor,
+              ),
             ),
             SizedBox(
               height: (size.height / 9).h,
@@ -49,8 +52,9 @@ class LandingScreen extends StatelessWidget {
               height: 10.h,
             ),
             SizedBox(
-              width: size.width * 75,
+              width: size.width * 0.8,
               child: CustomButton(
+                color: tabColor,
                 text: "AGREE AND CONTINUE",
                 onpressed: () => navigateToLoginScreen(context),
               ),
