@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp_clone/common/utils/colors.dart';
-import 'package:whatsapp_clone/features/auth/screens/login_screen.dart';
+import 'package:whatsapp_clone/features/auth/screens/otp_screen.dart';
+import 'package:whatsapp_clone/features/landing/screens/landing_screen.dart';
 import 'package:whatsapp_clone/firebase_options.dart';
 import 'package:whatsapp_clone/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -33,7 +35,9 @@ class MyApp extends StatelessWidget {
                 appBarTheme: AppBarTheme(color: appBarColor),
               ),
               onGenerateRoute: (settings) => generateRoute(settings),
-              home: LoginScreen());
+              home: OtpScreen(
+                verificationId: "12334",
+              ));
         });
   }
 }

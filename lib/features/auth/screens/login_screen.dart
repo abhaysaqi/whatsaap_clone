@@ -61,14 +61,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SizedBox(
+              height: 20.h,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   'Whatsapp will need to verify your phone number.',
-                  style: TextStyle(color: textColor, fontSize: 24.sp),
+                  style: TextStyle(color: textColor, fontSize: 14.sp),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 10.h),
                 TextButton(
                   onPressed: pickCountry,
                   child: Text(
@@ -77,25 +80,31 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 20.h),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (country != null)
-                      Text(
-                        '+${country!.phoneCode}',
-                        style: TextStyle(color: textColor, fontSize: 18.sp),
+                Padding(
+                  padding: country == null
+                      ? EdgeInsets.symmetric(horizontal: 10.w)
+                      : EdgeInsets.only(left: 10.w, right: 40.w),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (country != null)
+                        Text(
+                          '+${country!.phoneCode}',
+                          style: TextStyle(color: textColor, fontSize: 16.sp),
+                        ),
+                      SizedBox(width: 5.w),
+                      Expanded(
+                        // Ensure TextField does not overflow
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          maxLength: 10,
+                          controller: phoneController,
+                          decoration: InputDecoration(
+                              hintText: "Phone number", counterText: ""),
+                        ),
                       ),
-                    SizedBox(width: 8.w),
-                    Expanded(
-                      // Ensure TextField does not overflow
-                      child: TextFormField(
-                        maxLength: 10,
-                        controller: phoneController,
-                        decoration: InputDecoration(
-                            hintText: "Phone number", counterText: ""),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

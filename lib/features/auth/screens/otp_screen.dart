@@ -36,8 +36,12 @@ class OtpScreen extends ConsumerWidget {
               width: size.width * 0.5,
               child: TextField(
                 textAlign: TextAlign.center,
+                maxLength: 6,
                 decoration: InputDecoration(
-                    hintText: "------", hintStyle: TextStyle(fontSize: 30.sp)),
+                    counterText: "",
+                    isDense: true,
+                    hintText: "------",
+                    hintStyle: TextStyle(fontSize: 30.sp)),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value.length == 6) {

@@ -58,6 +58,9 @@ class LandingScreen extends StatelessWidget {
                 text: "AGREE AND CONTINUE",
                 onpressed: () => navigateToLoginScreen(context),
               ),
+            ),
+            SizedBox(
+              height: 20.h,
             )
           ],
         ),
